@@ -1,0 +1,10 @@
+(define (fib n)
+  (fib-iter 2 1 0 n))
+
+(define (fib-iter a b c count)
+  (if (< count 3)
+      (cond ((= count 2) a))
+      (fib-iter (+ a (* b 2) (* c 3)) a b (- count 1))))
+(fib 4)
+
+

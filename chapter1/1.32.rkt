@@ -1,0 +1,48 @@
+;accumulate
+(define (accumulate combiner null-value term a next b)
+  (if(> a b)
+     null-value
+     (combiner (term a)
+               (accumulate combiner null-value term (next a) next b))))
+;sum
+(define (sum f a b)
+  (define (fuse x y) (+ x y))
+  (define null-value 0)
+  (define (next x) (+ x 1))
+  (accumulate fuse null-value f a next b))
+
+(define (square x)
+  (* x x))
+
+;product
+(define (product f a b)
+  (define (fuse x y) (* x y))
+  (define null-value 1)
+  (define (next x) (+ x 1))
+  (accumulate fuse null-value f a next b))
+
+;answer
+(define (sum term a next b)
+    (accumulate + 
+                0 
+                term 
+                a 
+                next 
+                b))
+
+;说明+和*本身就是过程
+(define (product term a next b)
+    (accumulate *
+                1 
+                term
+                a
+                next
+                b))
+
+;accumulate迭代
+(define (accumulate combiner null-value term a next b)
+  (define (acc-iter a result)
+    (if (> a b)
+        reslut
+        (acc-iter (next a) (combiner result (term a)))))
+  (acc-iter a null-value))
